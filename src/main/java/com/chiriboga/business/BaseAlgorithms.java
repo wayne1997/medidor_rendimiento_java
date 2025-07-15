@@ -4,11 +4,38 @@
  */
 package com.chiriboga.business;
 
+import java.util.Random;
+
 /**
  *
  * @author Alexander Chiriboga
  */
 public class BaseAlgorithms {
+    
+    public long countHalves(long size){
+        long count = 0;
+        while(size > 1){
+           size /= 2;
+           count++;
+        }
+        return count;
+    }
+    
+    public int buildMatrix(long size)
+    {
+        int matrizSize = (int) size;
+        long [][] matriz = new long[matrizSize][matrizSize];
+        Random randValue = new Random();
+        int sum = 0;
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                matriz[i][j] = randValue.nextInt(matrizSize) + 1;
+                sum +=matriz[i][j];
+                
+            }
+        }
+        return sum;
+    }
 
     public long totalSumLoopAlg(long size) {
         System.out.println("Size: " + size);
@@ -44,6 +71,7 @@ public class BaseAlgorithms {
         }
     }
     
+    
     public String getTotalSumLoopAlg(){
         return """
                public int SumaConBucle(int size) {
@@ -77,6 +105,27 @@ public class BaseAlgorithms {
                        }
                        return "¡Algoritmo terminado! 🔥 He contado desde el incio hasta el final y viceversa ";
                 }
+               """;
+    }
+    
+    
+    public String getSumMatrix() {
+        return """
+               public int buildMatrix(long size)
+                   {
+                       int matrizSize = (int) size;
+                       long [][] matriz = new long[matrizSize][matrizSize];
+                       Random randValue = new Random();
+                       int sum = 0;
+                       for (int i = 0; i < matriz.length; i++) {
+                           for (int j = 0; j < matriz.length; j++) {
+                               matriz[i][j] = randValue.nextInt(matrizSize) + 1;
+                               sum +=matriz[i][j];
+                               
+                           }
+                       }
+                       return sum;
+                   }
                """;
     }
 }

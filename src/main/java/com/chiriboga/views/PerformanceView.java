@@ -41,6 +41,7 @@ public class PerformanceView extends javax.swing.JFrame {
     
     public void initAppComponents(){
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         baseAlgorithms = new BaseAlgorithms();
         this.consoleArea.setBackground(Color.BLACK);
         this.codeEditorPanel.setEditable(false);
@@ -129,7 +130,7 @@ public class PerformanceView extends javax.swing.JFrame {
 
         showPairsAlg.setBackground(new java.awt.Color(102, 102, 255));
         showPairsAlg.setForeground(new java.awt.Color(255, 255, 255));
-        showPairsAlg.setText("Mostrar pares");
+        showPairsAlg.setText("Elementos internos");
         showPairsAlg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showPairsAlgActionPerformed(evt);
@@ -376,11 +377,31 @@ public class PerformanceView extends javax.swing.JFrame {
     }//GEN-LAST:event_doubleLoopAlgActionPerformed
 
     private void showPairsAlgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPairsAlgActionPerformed
-        // TODO add your handling code here:
+        long sizeMatrix =  this.readFromInputSize();
+        long startTime = System.currentTimeMillis();
+        int sum = this.baseAlgorithms.buildMatrix(sizeMatrix);
+        this.codeEditorPanel.setText(this.baseAlgorithms.getSumMatrix());
+        this.writeOnConsole("El resultado de la suma es: " + sum);
+        long endTime = System.currentTimeMillis();
+        long avgTime = endTime - startTime;
+        xData.add(sizeMatrix);
+        yData.add(avgTime);
+        this.generate2DGraph(xData, yData);
+        this.sizeInputLabel.setValue(0);
     }//GEN-LAST:event_showPairsAlgActionPerformed
 
     private void countHalvesAlgBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countHalvesAlgBtnActionPerformed
-        // TODO add your handling code here:
+        var size = this.readFromInputSize();
+        long startTime = System.currentTimeMillis();
+        long sum = this.baseAlgorithms.countHalves(size);
+        this.codeEditorPanel.setText(this.baseAlgorithms.getSumMatrix());
+        this.writeOnConsole("El número de mitades es: " + sum);
+        long endTime = System.currentTimeMillis();
+        long avgTime = endTime - startTime;
+        xData.add(size);
+        yData.add(avgTime);
+        this.generate2DGraph(xData, yData);
+        this.sizeInputLabel.setValue(0);
     }//GEN-LAST:event_countHalvesAlgBtnActionPerformed
 
     private void showImformationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showImformationBtnActionPerformed
